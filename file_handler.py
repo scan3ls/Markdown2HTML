@@ -1,5 +1,6 @@
 """
-    Handles files
+    Handles opening, closing, reading, writing, etc. 
+    files
 """
 
 
@@ -25,3 +26,22 @@ def get_file_names(args):
         err_print("Missing", md_file)
 
     return md_file, html_file
+
+
+def read_md(filename):
+    """
+        read_md - reads/returns text of an md file
+    """
+
+    with open(filename, 'r') as f:
+        text = f.read()
+
+    return text
+
+
+def write_html(html_file, html_text):
+    """
+    """
+
+    with open(html_file, 'w') as f:
+        f.write(html_text[:-1])
