@@ -13,7 +13,7 @@ if __name__ == "__main__":
     argv.pop(0)
 
     md_file, html_file = get_file_names(argv)
-    md_text = read_md(md_file)
+    md_text = read_md(md_file) + "\n"
 
     html_text = ""
     sections = parse(md_text)

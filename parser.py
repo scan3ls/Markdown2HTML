@@ -160,8 +160,39 @@ def parse(text=""):
             section = html
 
         # Find normal text and add <br/>
+        for index, line in enumerate(section):
+            line.lstrip()
+            if line[0] not in ['<', '\t']:
+                html = '<p>\n\t{}\n</p>'.format(line)
+                section[index] = html
+
+        for index, line in enumerate(section):
+            try:
+                next_line = section[index + 1]
+            except:
+                continue
+            next_tag = next_line[1]
+            cur_tag = line[-2]
+
+            if next_tag == cur_tag:
+                section[index] = line[:-5]
+                section[index + 1] = section[index + 1][4:]
+                section.insert(index + 1, "\t\t<br />")
 
         # bold and emphasis normal text
-        # print(section)
+        for index, line in enumerate(section):
+            match = re.search('\*\*.+\*\*', line)
+            if match != None:
+                result = re.sub(r'(\*\*)(.+)(\*\*)', r'<b>\2</b>', line)
+                section[index] = result
+
+        for index, line in enumerate(section):
+            match = re.search('__.+__', line)
+            if match != None:
+                result = re.sub(r'(__)(.+)(__)', r'<em>\2</em>', line)
+                section[index] = result
+                continue
+
         html_list.append(section)
+
     return html_list
