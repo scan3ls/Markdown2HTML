@@ -11,6 +11,7 @@ def get_tags(tag):
 
     return open_tag, close_tag
 
+
 def headings(line=""):
     """
         headings - generate html headings from md headings
@@ -38,7 +39,7 @@ def headings(line=""):
     groups = result.groups()
     h_level = len(groups[0])
     text = groups[1]
-    
+
     open_tag, close_tag = get_tags(h_tags[h_level])
     html = "{}{}{}".format(
         open_tag, text, close_tag
@@ -104,6 +105,7 @@ def olist(lines):
 
     return html
 
+
 def parse(text=""):
     """
         parse - main parse function
@@ -127,7 +129,7 @@ def parse(text=""):
 
         # Change Heading
         for index, line in enumerate(section):
-            html = headings(line) 
+            html = headings(line)
             if html is not None:
                 section[index] = html
 
@@ -182,13 +184,13 @@ def parse(text=""):
         # bold and emphasis normal text
         for index, line in enumerate(section):
             match = re.search('\*\*.+\*\*', line)
-            if match != None:
+            if match is not None:
                 result = re.sub(r'(\*\*)(.+)(\*\*)', r'<b>\2</b>', line)
                 section[index] = result
 
         for index, line in enumerate(section):
             match = re.search('__.+__', line)
-            if match != None:
+            if match is not None:
                 result = re.sub(r'(__)(.+)(__)', r'<em>\2</em>', line)
                 section[index] = result
                 continue

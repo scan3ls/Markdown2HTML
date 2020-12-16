@@ -1,5 +1,5 @@
 """
-    Handles opening, closing, reading, writing, etc. 
+    Handles opening, closing, reading, writing, etc.
     files
 """
 
