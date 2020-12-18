@@ -12,4 +12,5 @@ def err_print(*args, **kwargs):
             kwargs - same as print **kwargs
     """
     from sys import stderr
-    print(*args, file=stderr, **kwargs)
+    # print(*args, file=stderr, **kwargs)
+    print(*args, **kwargs)
