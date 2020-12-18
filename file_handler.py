@@ -24,6 +24,7 @@ def get_file_names(args):
 
     if path.exists(md_file) is False:
         err_print("Missing", md_file)
+        exit(1)
 
     return md_file, html_file
 
