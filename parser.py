@@ -137,7 +137,7 @@ def parse(text=""):
         is_ulist = False
         for line in section:
             line.lstrip()
-            pattern = '(^\- )(.*)'
+            pattern = r'(^\- )(.*)'
             result = re.search(pattern, line)
             if result is not None:
                 is_ulist = True
@@ -151,7 +151,7 @@ def parse(text=""):
         is_olist = False
         for line in section:
             line.lstrip()
-            pattern = '(^\* )(.*)'
+            pattern = r'(^\* )(.*)'
             result = re.search(pattern, line)
             if result is not None:
                 is_olist = True
@@ -171,7 +171,7 @@ def parse(text=""):
         for index, line in enumerate(section):
             try:
                 next_line = section[index + 1]
-            except:
+            except IndexError:
                 continue
             next_tag = next_line[1]
             cur_tag = line[-2]
@@ -183,7 +183,7 @@ def parse(text=""):
 
         # bold and emphasis normal text
         for index, line in enumerate(section):
-            match = re.search('\*\*.+\*\*', line)
+            match = re.search(r'\*\*.+\*\*', line)
             if match is not None:
                 result = re.sub(r'(\*\*)(.+)(\*\*)', r'<b>\2</b>', line)
                 section[index] = result
